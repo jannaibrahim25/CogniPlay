@@ -1,0 +1,46 @@
+CogniPLay
+|
+|__ games
+|   |
+|   |__ detective_game
+|       |
+|       |__ lib
+|       |   |
+|       |   |__ components
+|       |   |   |
+|       |   |   |__ objects //TODO: narrow down understanding of our items'
+|       |   |   |   |               functioning, esp w/ multiple levels
+|       |   |   |   |__ object_init.dart
+|       |   |   |   |__ object_disappear.dart
+|       |   |   |
+|       |   |   |
+|       |   |   |__ characters
+|       |   |       |
+|       |   |       |__ thief
+|       |   |       |   |
+|       |   |       |   |__ thief.dart //TODO: a single thief.dart file, or a
+|       |   |       |       file for thief's movement, rendering, disappearance?
+|       |   |       |__ protagonist
+|       |   |           |
+|       |   |           |__ protagonist.dart //TODO: a single protagonist.dart file, or a
+|       |   |                        file for protag's movement, rendering, disappearance?
+|       |   |__ map
+|       |   |
+|       |   |__ levels
+|       |   |
+|       |   |__ detective_game.dart
+|       |   |__ detective_game_widget.dart
+|       |   |__ main.dart
+|       |
+|       |__ assets
+|           |
+|           |__ images
+|               |
+|               |__ placeholder.png
+|
+|__ UI
+|   |
+|   |__ //TODO: file structure for front-end
+|
+|__ pubspec.yaml
+|__ readme

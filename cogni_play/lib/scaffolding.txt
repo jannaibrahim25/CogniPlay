@@ -15,7 +15,7 @@ CogniPlay
 |       |   |   |__ objects
 |       |   |   |   |
 |       |   |   |   |__ object_init.dart
-|       |   |   |   |__ object_disappear.dart
+|       |   |   |   |__ object_behavior.dart
 |       |   |   |
 |       |   |   |__ characters
 |       |   |       |

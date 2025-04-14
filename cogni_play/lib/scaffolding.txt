@@ -29,9 +29,8 @@ CogniPlay
 |       |   |
 |       |   |__ levels
 |       |   |   |
-|       |   |   |__ levels.dart
-|       |   |   |__ location_based.dart
-|       |   |   |__ pattern_based.dart
+|       |   |   |__ level_loader.dart
+|       |   |   |__ level_data.dart
 |       |   |
 |       |   |__ detective_game.dart
 |       |   |__ detective_game_widget.dart

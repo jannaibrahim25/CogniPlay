@@ -1,4 +1,4 @@
-CogniPLay
+CogniPlay
 |
 |__ games
 |   |
@@ -8,25 +8,30 @@ CogniPLay
 |       |   |
 |       |   |__ components
 |       |   |   |
-|       |   |   |__ objects //TODO: narrow down understanding of our items'
-|       |   |   |   |               functioning, esp w/ multiple levels
+|       |   |   |__ map
+|       |   |   |   |
+|       |   |   |   |__ map.dart
+|       |   |   |
+|       |   |   |__ objects
+|       |   |   |   |
 |       |   |   |   |__ object_init.dart
 |       |   |   |   |__ object_disappear.dart
-|       |   |   |
 |       |   |   |
 |       |   |   |__ characters
 |       |   |       |
 |       |   |       |__ thief
 |       |   |       |   |
-|       |   |       |   |__ thief.dart //TODO: a single thief.dart file, or a
-|       |   |       |       file for thief's movement, rendering, disappearance?
+|       |   |       |   |__ thief.dart
+|       |   |       |
 |       |   |       |__ protagonist
 |       |   |           |
-|       |   |           |__ protagonist.dart //TODO: a single protagonist.dart file, or a
-|       |   |                        file for protag's movement, rendering, disappearance?
-|       |   |__ map
+|       |   |           |__ protagonist.dart
 |       |   |
 |       |   |__ levels
+|       |   |   |
+|       |   |   |__ levels.dart
+|       |   |   |__ location_based.dart
+|       |   |   |__ pattern_based.dart
 |       |   |
 |       |   |__ detective_game.dart
 |       |   |__ detective_game_widget.dart
@@ -36,8 +41,27 @@ CogniPLay
 |           |
 |           |__ images
 |               |
-|               |__ placeholder.png
-|
+|               |__ backgrounds
+|               |   |
+|               |   |__ map_backgrounds
+|               |   |   |
+|               |   |   |__ placeholder.png
+|               |   |
+|               |   |__ game_backgrounds
+|               |       |
+|               |       |__ placeholder.png
+|               |
+|               |__ objects
+|               |   |
+|               |   |__ theme1
+|               |       |
+|               |       |__ object_1.png
+|               |       |__ object_2.png
+|               |
+|               |__ thieves
+|               |
+|               |__ avatar // custom avatar objects; explicate later. Should have features folder
+|                               (with categories for eyes, nose, mouth, etc) and clothes folder
 |__ UI
 |   |
 |   |__ //TODO: file structure for front-end

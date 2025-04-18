@@ -11,6 +11,16 @@ dependencies:
   flutter:
     sdk: flutter
   flame: ^1.26.1
+  google_fonts: ^6.1.0
+
+flutter:
+  assets:
+    - assets/images/background.png
+    - assets/icons/settings.png
+    - assets/icons/logo.png
+    - assets/icons/profile.png
+    - assets/icons/search.png
+    - assets/icons/back.png
 
 dependency_overrides:
  material_color_utilities: ^0.12.0 

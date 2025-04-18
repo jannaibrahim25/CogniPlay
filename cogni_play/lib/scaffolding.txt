@@ -35,6 +35,15 @@ CogniPlay
 |       |   |__ detective_game.dart
 |       |   |__ detective_game_widget.dart
 |       |   |__ main.dart
+|       |   |
+|       |   |
+|       |   |__UI
+|       |       |
+|       |       |__Homescreen.dart
+|       |       |__Instructions.dart
+|       |       |__Detective_game_screen.dart (contains all overlays for game)
+|       |       |__Profile.dart
+|       |       |__Settings.dart
 |       |
 |       |__ assets
 |           |

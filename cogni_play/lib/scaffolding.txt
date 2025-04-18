@@ -1,0 +1,69 @@
+CogniPlay
+|
+|__ games
+|   |
+|   |__ detective_game
+|       |
+|       |__ lib
+|       |   |
+|       |   |__ components
+|       |   |   |
+|       |   |   |__ map
+|       |   |   |   |
+|       |   |   |   |__ map.dart
+|       |   |   |
+|       |   |   |__ objects
+|       |   |   |   |
+|       |   |   |   |__ object_init.dart
+|       |   |   |   |__ object_behavior.dart
+|       |   |   |
+|       |   |   |__ characters
+|       |   |       |
+|       |   |       |__ thief
+|       |   |       |   |
+|       |   |       |   |__ thief.dart
+|       |   |       |
+|       |   |       |__ protagonist
+|       |   |           |
+|       |   |           |__ protagonist.dart
+|       |   |
+|       |   |__ levels
+|       |   |   |
+|       |   |   |__ level_loader.dart
+|       |   |   |__ level_data.dart
+|       |   |
+|       |   |__ detective_game.dart
+|       |   |__ detective_game_widget.dart
+|       |   |__ main.dart
+|       |
+|       |__ assets
+|           |
+|           |__ images
+|               |
+|               |__ backgrounds
+|               |   |
+|               |   |__ map_backgrounds
+|               |   |   |
+|               |   |   |__ placeholder.png
+|               |   |
+|               |   |__ game_backgrounds
+|               |       |
+|               |       |__ placeholder.png
+|               |
+|               |__ objects
+|               |   |
+|               |   |__ theme1
+|               |       |
+|               |       |__ object_1.png
+|               |       |__ object_2.png
+|               |
+|               |__ thieves
+|               |
+|               |__ avatar // custom avatar objects; explicate later. Should have features folder
+|                               (with categories for eyes, nose, mouth, etc) and clothes folder
+|__ UI
+|   |
+|   |__ //TODO: file structure for front-end
+|
+|__ pubspec.yaml
+|__ readme

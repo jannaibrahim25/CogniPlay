@@ -1,6 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-// TODO: create the actual folders and file destinations
+//import 'components/map/map.dart';
 //import 'components/map/map.dart';
 //import 'components/characters/thief/thief.dart';
 //import 'components/objects/object_behavior.dart';

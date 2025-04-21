@@ -33,17 +33,17 @@ CogniPlay
 |       |   |   |__ level_data.dart
 |       |   |
 |       |   |__ detective_game.dart
-|       |   |__ detective_game_widget.dart
 |       |   |__ main.dart
+|       |   |__ scaffolding.dart
 |       |   |
 |       |   |
 |       |   |__UI
 |       |       |
-|       |       |__Homescreen.dart
-|       |       |__Instructions.dart
-|       |       |__Detective_game_screen.dart (contains all overlays for game)
-|       |       |__Profile.dart
-|       |       |__Settings.dart
+|       |       |__ home_screen.dart
+|       |       |__ instructions.dart
+|       |       |__ detective_game_screen.dart (contains all overlays for game)
+|       |       |__ profile.dart
+|       |       |__ settings.dart
 |       |
 |       |__ assets
 |           |
@@ -70,9 +70,7 @@ CogniPlay
 |               |
 |               |__ avatar // custom avatar objects; explicate later. Should have features folder
 |                               (with categories for eyes, nose, mouth, etc) and clothes folder
-|__ UI
-|   |
-|   |__ //TODO: file structure for front-end
+
 |
 |__ pubspec.yaml
 |__ readme

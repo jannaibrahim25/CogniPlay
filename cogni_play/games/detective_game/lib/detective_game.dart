@@ -1,10 +1,10 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-//import 'components/map/map.dart';
-//import 'components/map/map.dart';
-//import 'components/characters/thief/thief.dart';
-//import 'components/objects/object_behavior.dart';
-//import 'levels/level_loader.dart';
+import 'components/map/map.dart';
+import 'components/map/map.dart';
+import 'components/characters/thief/thief.dart';
+import 'components/objects/object_behavior.dart';
+import 'levels/level_loader.dart';
 
 class DetectiveGame extends FlameGame {
   @override

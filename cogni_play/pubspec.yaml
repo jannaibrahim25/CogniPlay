@@ -10,8 +10,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flame: ^1.26.1
+  flame: ^1.28.0
   google_fonts: ^6.1.0
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mockito: ^5.4.2
+
 
 flutter:
   assets:

@@ -7,8 +7,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flame/extensions.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:cogni_play/object_behavior.dart';
-import 'package:cogni_play/object_init.dart';
+import '../object_behavior.dart';
+import '../object_init.dart';
 
 
 // import 'package:cogni_play/lib/object_init.dart';

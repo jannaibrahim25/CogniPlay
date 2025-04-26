@@ -1,0 +1,13 @@
+{
+  "levels":[
+      {
+        "id": 1,
+        "objects": ["banana", "book", "football", "blue_hat", "apple", "orange", "yellow_ball", "tree"],
+        "num_to_disappear": 2,
+        "disappear_type": {
+          "type": "location_based",
+          "location": ["top_right"]
+        }
+      }
+    ]
+  }

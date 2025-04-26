@@ -1,13 +1,15 @@
 // level_manager.dart
 // This file manages the game levels, including loading level data from JSON, handling object disappearance logic, and initializing objects in the game world.
 
-import 'package:cogni_play/object_init.dart';
+import 'object_init.dart';
 import 'package:flame/components.dart';
 import 'dart:ui' as ui; // Flame uses this for image rendering
 
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
+
+import 'package:flutter/services.dart' show rootBundle;
 
 class LevelData {
   final int id;
@@ -61,6 +63,7 @@ class ObjectManager {
   Map<String, String> objectImages = {}; // Maps object names to image paths
   int currentLevel = 1;
 
+/*
   Future<void> loadLevels(String jsonPath) async {
     try {
       final file = File(jsonPath);
@@ -77,6 +80,28 @@ class ObjectManager {
       print('Error loading levels: $e');
     }
   }
+  */
+
+
+  Future<void> loadLevels(String jsonPath) async {
+    try {
+      final jsonString = await rootBundle.loadString(jsonPath);
+      final Map<String, dynamic> jsonData = jsonDecode(jsonString);
+
+      levels = (jsonData['levels'] as List)
+          .map((levelJson) => LevelData.fromJson(levelJson))
+          .toList();
+
+      for (var object in levels.expand((level) => level.objects)) {
+        objectImages[object] = 'assets/images/Objects/$object.png';
+      }
+    } catch (e) {
+      print('Error loading levels: $e');
+    }
+  }
+
+
+
 
   void loadLevel(int levelId) {
     final level = levels.firstWhere((l) => l.id == levelId);
@@ -101,7 +126,7 @@ class ObjectManager {
   void _handleLocationBasedDisappearance(LevelData level) {
     final numToHide = min(level.numToDisappear, level.objects.length);
     disappearedObjects = level.objects.sublist(0, numToHide);
-    currentObjects.removeWhere((obj) => disappearedObjects.contains(obj));
+    //currentObjects.removeWhere((obj) => disappearedObjects.contains(obj));
   }
 
   void _handleRandomDisappearance(LevelData level) {
@@ -112,7 +137,7 @@ class ObjectManager {
     disappearedObjects = disappearedObjects.sublist(
       0, min(level.numToDisappear, availableObjects.length));
 
-    currentObjects.removeWhere((obj) => disappearedObjects.contains(obj));
+    //currentObjects.removeWhere((obj) => disappearedObjects.contains(obj));
   }
 
   void _handlePatternDisappearance(LevelData level) {
@@ -123,7 +148,7 @@ class ObjectManager {
       _handleRandomDisappearance(level);
     }
 
-    currentObjects.removeWhere((obj) => disappearedObjects.contains(obj));
+   //currentObjects.removeWhere((obj) => disappearedObjects.contains(obj));
   }
 
   void stealObject(String objectName) {
@@ -148,11 +173,16 @@ class ObjectManager {
 
   /// Initializes level objects in random non-overlapping positions
   /// using preloaded Flame-compatible images (ui.Image)
-  Future<List<SpriteComponent>> initializeLevelObjects(
-    Vector2 screenSize,
-    Map<String, ui.Image> loadedImages,
+  Future<Map<String, SpriteComponent>> initializeLevelObjects(
+  Vector2 screenSize,
+  Map<String, ui.Image> loadedImages,
   ) async {
     final initializer = ObjectInitializer();
-    return initializer.initializeObjects(currentObjects, screenSize, loadedImages);
+    final List<SpriteComponent> spriteComponents = await initializer.initializeObjects(currentObjects, screenSize, loadedImages);
+    final Map<String, SpriteComponent> objectMap = {};
+    for (int i = 0; i < currentObjects.length; i++) {
+      objectMap[currentObjects[i]] = spriteComponents[i];
+    }
+    return objectMap;
   }
 }

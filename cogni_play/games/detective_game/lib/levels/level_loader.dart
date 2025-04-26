@@ -1,4 +1,3 @@
-import 'level_data.json';
 
 /*
 plan for this file:

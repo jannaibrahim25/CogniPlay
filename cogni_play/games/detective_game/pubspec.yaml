@@ -1,0 +1,47 @@
+name: cogni_play
+description: cogni_play game
+version: 0.0.0
+publish_to: none
+
+environment:
+  sdk: ^3.0.0
+  flutter: ^3.13.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flame: ^1.28.0
+  google_fonts: ^6.1.0
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mockito: ^5.4.2
+
+
+flutter:
+  assets:
+    - assets/images/background.png
+    - assets/images/Objects/apple.png
+    - assets/images/Objects/banana.png
+    - assets/images/Objects/blue_hat.png
+    - assets/images/Objects/book.png
+    - assets/images/Objects/brown_chair.png
+    - assets/images/Objects/football.png
+    - assets/images/Objects/jeep.png
+    - assets/images/Objects/orange.png
+    - assets/images/Objects/pencil.png
+    - assets/images/Objects/red_bottle.png
+    - assets/images/Objects/red_car.png
+    - assets/images/Objects/tree.png
+    - assets/images/Objects/yellow_ball.png
+    - assets/icons/settings.png
+    - assets/icons/logo.png
+    - assets/icons/profile.png
+    - assets/icons/search.png
+    - assets/icons/back.png
+    - assets/level_data.json
+
+dependency_overrides:
+ material_color_utilities: ^0.12.0 

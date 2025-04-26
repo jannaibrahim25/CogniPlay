@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:cogni_play/UI/detective_game_screen.dart';
+import 'detective_game_screen.dart';
 
 class InstructionsPage extends StatefulWidget {
   const InstructionsPage({super.key});

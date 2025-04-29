@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'UI/home_screen.dart'; // make sure the path is correct!
+import 'UI/home_screen.dart'; 
 
 void main() {
   runApp(const MyApp());

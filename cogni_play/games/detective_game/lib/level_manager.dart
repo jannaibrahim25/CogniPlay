@@ -36,7 +36,7 @@ class LevelData {
 
 class DisappearType {
   final String type;
-  final dynamic location; // Can be String or List<String>
+  final List<String>? location; // ✅ Make location ALWAYS a List<String> or null
   final List<String>? hideObjects;
 
   DisappearType({
@@ -46,15 +46,27 @@ class DisappearType {
   });
 
   factory DisappearType.fromJson(Map<String, dynamic> json) {
+    final dynamic locationData = json['location'];
+
+    List<String>? locationList;
+    if (locationData != null) {
+      if (locationData is List) {
+        locationList = List<String>.from(locationData.map((e) => e.toString()));
+      } else if (locationData is String) {
+        locationList = [locationData];
+      }
+    }
+
     return DisappearType(
       type: json['type'],
-      location: json['location'],
-      hideObjects: json['hide_objects'] != null 
+      location: locationList,
+      hideObjects: json['hide_objects'] != null
           ? List<String>.from(json['hide_objects'])
           : null,
     );
   }
 }
+
 
 class ObjectManager {
   List<LevelData> levels = [];
@@ -62,25 +74,6 @@ class ObjectManager {
   List<String> disappearedObjects = [];
   Map<String, String> objectImages = {}; // Maps object names to image paths
   int currentLevel = 1;
-
-/*
-  Future<void> loadLevels(String jsonPath) async {
-    try {
-      final file = File(jsonPath);
-      final jsonString = await file.readAsString();
-      final jsonData = jsonDecode(jsonString) as List;
-
-      levels = jsonData.map((levelJson) => LevelData.fromJson(levelJson)).toList();
-
-      // Setup image paths for manual use or reference
-      for (var object in levels.expand((level) => level.objects)) {
-        objectImages[object] = 'assets/images/objects/$object.png';
-      }
-    } catch (e) {
-      print('Error loading levels: $e');
-    }
-  }
-  */
 
 
   Future<void> loadLevels(String jsonPath) async {
@@ -98,6 +91,19 @@ class ObjectManager {
     } catch (e) {
       print('Error loading levels: $e');
     }
+  }
+
+  List<String> getType(int levelId) {
+    final level = levels.firstWhere((l) => l.id == levelId);
+    if (level.disappearType.type == 'location_based') {
+      return level.disappearType.location ?? [];
+    }
+    return [];
+  }
+
+  int getNumToDisappear(int levelId) {
+    final level = levels.firstWhere((l) => l.id == levelId);
+    return level.numToDisappear;
   }
 
 
@@ -126,6 +132,7 @@ class ObjectManager {
   void _handleLocationBasedDisappearance(LevelData level) {
     final numToHide = min(level.numToDisappear, level.objects.length);
     disappearedObjects = level.objects.sublist(0, numToHide);
+
     //currentObjects.removeWhere((obj) => disappearedObjects.contains(obj));
   }
 
@@ -176,9 +183,11 @@ class ObjectManager {
   Future<Map<String, SpriteComponent>> initializeLevelObjects(
   Vector2 screenSize,
   Map<String, ui.Image> loadedImages,
+  List<String> disapear_type,
+  int num_to_disappear,
   ) async {
     final initializer = ObjectInitializer();
-    final List<SpriteComponent> spriteComponents = await initializer.initializeObjects(currentObjects, screenSize, loadedImages);
+    final List<SpriteComponent> spriteComponents = await initializer.initializeObjects(currentObjects, screenSize, loadedImages, disapear_type, num_to_disappear);
     final Map<String, SpriteComponent> objectMap = {};
     for (int i = 0; i < currentObjects.length; i++) {
       objectMap[currentObjects[i]] = spriteComponents[i];

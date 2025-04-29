@@ -8,6 +8,15 @@
           "type": "location_based",
           "location": ["top_right"]
         }
+      },
+      {
+        "id": 2,
+        "objects": ["tree", "brown_chair", "book", "pencil", "jeep", "red_bottle", "banana", "red_car", "yellow_ball"],
+        "num_to_disappear": 3,
+        "disappear_type": {
+          "type": "location_based",
+          "location": ["top_right", "bottom_left"]
+        }
       }
     ]
   }

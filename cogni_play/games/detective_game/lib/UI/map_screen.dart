@@ -51,7 +51,7 @@ class _MapScreenState extends State<MapScreen> with SingleTickerProviderStateMix
         children: [
           // Background covers entire screen
           Positioned.fill(
-            child: Image.asset('assets/background.png', fit: BoxFit.cover),
+            child: Image.asset('assets/images/background.png', fit: BoxFit.cover),
           ),
           // Current level marker (circle)
           Positioned(

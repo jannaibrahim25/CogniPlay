@@ -1,107 +1,282 @@
-import 'level_manager.dart'; // You already have it set
-import 'package:flame/events.dart'; // Required for TapDownInfo
+import 'level_manager.dart'; 
+import 'package:flame/events.dart'; 
 import 'package:flame/components.dart';
-import 'package:flutter/services.dart'; // for rootBundle
+import 'package:flutter/services.dart'; 
 import 'dart:ui' as ui;
 import 'dart:async';
 import 'package:flame/game.dart';
-import 'package:flutter/material.dart'; // For TextStyle
+import 'package:flutter/material.dart';
 
 
 class DetectiveGame extends FlameGame with TapDetector {
   late ObjectManager objectManager;
   late Map<String, SpriteComponent> levelObjects;
   late Timer countdownTimer;
-
   late TextComponent countdownText;
+  late SpriteComponent background;
+
+  //Variables for game and level managment
   int countdownValue = 5;
+  int levelNumber = 1; 
+  bool allowGuessing = false;
+  List<Vector2> selectedPositions = [];
+  final double guessRadius = 50; //size of guess square
 
-  @override
-  Future<void> onLoad() async {
-    await super.onLoad();
+  //Starts the level and clears all previous level objects
+  Future<void> startLevel(int levelNumber) async {
+  overlays.remove('CheckButton'); 
+  allowGuessing = false;
+  selectedPositions.clear();
+  children.clear();
+  this.levelNumber = levelNumber;
+  objectManager.loadLevel(levelNumber);
 
-    objectManager = ObjectManager();
-    await objectManager.loadLevels('assets/level_data.json');
-    objectManager.loadLevel(1);
+  // Load and add background
+  final backgroundImage = await images.load('ocean_level.jpg'); //ocean background for every level right now
+  background = SpriteComponent(
+    sprite: Sprite(backgroundImage),
+    size: size,
+    position: Vector2.zero(),
+    priority: -1,
+  );
+  add(background);
 
-    Map<String, ui.Image> loadedImages = {};
-
-    for (var objectName in objectManager.currentObjects) {
-      final imagePath = objectManager.getImagePath(objectName);
-      if (imagePath != null) {
-        final data = await rootBundle.load(imagePath);
-        final codec = await ui.instantiateImageCodec(Uint8List.view(data.buffer));
-        final frame = await codec.getNextFrame();
-        loadedImages[objectName] = frame.image;
-      }
+  // load the objects and map the name to created sprites
+  Map<String, ui.Image> loadedImages = {};
+  for (var objectName in objectManager.currentObjects) {
+    final imagePath = objectManager.getImagePath(objectName);
+    if (imagePath != null) {
+      final data = await rootBundle.load(imagePath);
+      final codec = await ui.instantiateImageCodec(Uint8List.view(data.buffer));
+      final frame = await codec.getNextFrame();
+      loadedImages[objectName] = frame.image;
     }
+  }
+  levelObjects = await objectManager.initializeLevelObjects(
+    size,
+    loadedImages,
+    objectManager.getType(levelNumber),
+    objectManager.getNumToDisappear(levelNumber),
+  );
 
-   levelObjects = await objectManager.initializeLevelObjects(size, loadedImages);
-    for (var obj in levelObjects.values) {
-      add(obj);
-    }
-
-    // Initialize countdown text
-    countdownText = TextComponent(
-      text: '$countdownValue',
-      position: Vector2(size.x / 2 - 20, 50),
-      textRenderer: TextPaint(
-        style: TextStyle(
-          fontSize: 48.0,
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    );
-    add(countdownText);
-
-    // Start countdown timer
-    countdownTimer = Timer(1.0, repeat: true, onTick: _updateCountdown);
-    countdownTimer.start();
-    print("Countdown Timer started.");
+  // Add the objects to the game
+  for (var obj in levelObjects.values) {
+    add(obj);
   }
 
+  // countdown timer (this will be changed 5 seconds is super short)
+  //UI for will change to add more information (Connor)
+  countdownValue = 5;
+  countdownText = TextComponent(
+    text: '$countdownValue',
+    position: Vector2(size.x / 2 - 20, 50),
+    textRenderer: TextPaint(
+      style: const TextStyle(
+        fontSize: 48.0,
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+  );
+  add(countdownText);
+  countdownTimer = Timer(1.0, repeat: true, onTick: _updateCountdown);
+  countdownTimer.start();
+}
+
+  //Updating the countdown timer
   void _updateCountdown() {
     countdownValue--;
     print("Countdown value: $countdownValue");
-
     countdownText.text = '$countdownValue';
-
     if (countdownValue <= 0) {
       countdownTimer.stop();
       _disappearObjects();
-      countdownText.removeFromParent(); // Remove countdown text
+      countdownText.removeFromParent(); 
     }
   }
 
+  //removes objects from the game once the time runs out and allows the user to start guessing
+  // I didn't use the method from level_manager.dart so maybe we can use that or just remove it
   void _disappearObjects() {
-    for (int i = 0; i < levelObjects.length; i++) {
-      if (objectManager.disappearedObjects.contains(levelObjects.keys.elementAt(i))) {
-        final obj = levelObjects.values.elementAt(i);
-        obj.removeFromParent(); // Remove the object from the game
-      }
+  for (int i = 0; i < levelObjects.length; i++) {
+    if (objectManager.disappearedObjects.contains(levelObjects.keys.elementAt(i))) {
+      final obj = levelObjects.values.elementAt(i);
+      obj.removeFromParent(); // Remove the object from the game
     }
   }
+    allowGuessing = true; // Enable guessing
+    overlays.add("CheckButton");
+  }
 
+
+  // onLoad method to start the game and read in the level data 
+  // Only called for the first level
   @override
+  Future<void> onLoad() async {
+    await super.onLoad();
+    objectManager = ObjectManager();
+    await objectManager.loadLevels('assets/level_data.json'); //in level_manager.dart
+    await startLevel(1);
+  }
+
+
+
+  // UI for completed game screen
+  void _showGameCompleteDialog() {
+  showDialog(
+    context: buildContext!,
+    barrierDismissible: false,
+    builder: (_) => AlertDialog(
+      title: const Text('Congratulations!'),
+      content: const Text('You have completed all levels! 🎉'),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.of(buildContext!).pop();
+          },
+          child: const Text('OK'),
+        ),
+      ],
+    ),
+  );
+}
+
+  // we can call this method to start every new level. 
+  // Right now there is no way to start from a saved level so we might need to work on that
+  void _loadNextLevel() {
+  levelNumber++;
+  if (levelNumber > objectManager.levels.length) {
+    _showGameCompleteDialog();
+    return;
+  }
+  startLevel(levelNumber);
+}
+
+  //UI to show the level complete after you get all the guess correctly
+  void _showLevelCompleteDialog() {
+  showDialog(
+    context: buildContext!,
+    barrierDismissible: false,
+    builder: (_) => AlertDialog(
+      title: const Text('Level Complete!'),
+      content: const Text('You found all the missing objects! Ready for next level?'),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.of(buildContext!).pop();
+            _loadNextLevel();
+          },
+          child: const Text('Next Level'),
+        ),
+      ],
+    ),
+  );
+  }
+
+
+//update the countdown timer
+@override
   void update(double dt) {
     super.update(dt);
-    countdownTimer.update(dt);  // Ensure the countdown timer updates in the game loop
+    countdownTimer.update(dt); 
   }
 
+
+  //handle user guesses
   @override
   void onTapDown(TapDownInfo info) {
-    final position = info.eventPosition.global;
+  if (!allowGuessing) return;
+  final position = info.eventPosition.global;
+  // Check if user tapped near an already selected guess
+  Vector2? guessToRemove;
+  for (var guess in selectedPositions) {
+    if (guess.distanceTo(position) <= guessRadius) {
+      guessToRemove = guess;
+      break;
+    }
+  }
+  if (guessToRemove != null) {
+    selectedPositions.remove(guessToRemove); // Deselect if near an existing guess
+    print('Deselected a guess at ${guessToRemove.toString()}');
+  } else {
+    // add a new guess if not full
+    if (selectedPositions.length < objectManager.disappearedObjects.length) {
+      selectedPositions.add(position);
+      print('Selected new guess at ${position.toString()}');
+    }
+  }
+}
 
-    for (int i = 0; i < levelObjects.length; i++) {
-      final obj = levelObjects.values.elementAt(i);
-      if (obj.toRect().contains(position.toOffset())) {
-        if (objectManager.disappearedObjects.contains(levelObjects.keys.elementAt(i))) {
-          print('Correct! You found a missing object: ${levelObjects.keys.elementAt(i)}');
-        } else {
-          print('Oops, that object wasn’t missing.');
+
+
+  //draw the guess on the screen
+  @override
+  void render(Canvas canvas) {
+    super.render(canvas);
+    final paint = Paint()
+      ..color = Colors.yellow
+      ..strokeWidth = 3
+      ..style = PaintingStyle.stroke;
+    for (var pos in selectedPositions) {
+      canvas.drawRect(
+        Rect.fromCenter(center: pos.toOffset(), width: guessRadius, height: guessRadius),
+        paint,
+      );
+    }
+  }
+
+
+  // Public method called by check answers overlay button
+  // This method checks the selected guesses against the disappeared objects
+  void checkAnswers() {
+    if (selectedPositions.length != objectManager.disappearedObjects.length) {
+      _showResultDialog('Please select ${objectManager.disappearedObjects.length} guesses!');
+      return;
+    }
+    int correctGuesses = 0;
+    final missingObjects = objectManager.disappearedObjects;
+    for (var guess in selectedPositions) {
+      bool foundMatch = false;
+      for (var objectName in missingObjects) {
+        final obj = levelObjects[objectName];
+        if (obj == null) continue;
+
+        final objCenter = obj.position;
+        final distance = guess.distanceTo(objCenter);
+
+        if (distance <= guessRadius) {
+          foundMatch = true;
+          break;
         }
       }
+      if (foundMatch) {
+        correctGuesses++;
+      }
     }
+    if (correctGuesses == missingObjects.length) {
+      _showLevelCompleteDialog(); // <-- NEW!!
+    } else {
+      _showResultDialog('Incorrect. You found $correctGuesses out of ${missingObjects.length} correctly.');
+    }
+  }
+
+  // Show the results from the guesses 
+  // shows how many you got correct
+  void _showResultDialog(String message) {
+    showDialog(
+      context: buildContext!,
+      builder: (_) => AlertDialog(
+        title: const Text('Result'),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(buildContext!).pop();
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
   }
 }

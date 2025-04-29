@@ -13,11 +13,18 @@ the flutter run command it will automatically load the app onto the simulator.
 
 
 
+Things we need to work on:
+  - Making sure the user only gets three guesses per level (keeping track of this on the screen so the user knows)
+  - Adding some UI and overlays to the game level (Connor)
+  - Restoring user data so we don't always start at level one 
+  - Adding in non-copyrighted pngs to the assets folder? Can we download free ones online? 
+  - Polishing up the user guesses selection. Right now it is a small yellow square I think we could make it look better and bigger
+  - Adding in the thief if we have time to the game
 
-Just for now:
 
 
-{
+Just for now: (I will change this - Connor)
+      {
         "id": 2,
         "objects": ["tree", "brown_chair", "book", "pencil", "blue_car", "red_bottle", "banana", "map", "yellow_ball"],
         "num_to_disappear": 3,
@@ -139,7 +146,7 @@ Just for now:
         "objects": ["map", "blue_car", "truck", "jeep", "book", "blue_hat", "red_car", "yellow_ball", "orange"],
         "num_to_disappear": 1,
         "disappear_type": {
-          "type": "",
+          "type": "pattern",
           "hide_objects": ["blue_car", "red_car", "jeep", "truck"]
         }
       }

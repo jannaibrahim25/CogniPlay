@@ -36,7 +36,7 @@ class LevelData {
 
 class DisappearType {
   final String type;
-  final List<String>? location; // ✅ Make location ALWAYS a List<String> or null
+  final List<String>? location; 
   final List<String>? hideObjects;
 
   DisappearType({

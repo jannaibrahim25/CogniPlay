@@ -8,8 +8,8 @@ import 'UI/sprite.dart';
 
 class ObjectInitializer {
   final List<CircleHitbox> _occupiedAreas = [];
-  final Vector2 _objectSize = Vector2(100, 100);
-  final double _margin = 30;
+  final Vector2 _objectSize = Vector2(70, 70); // Size of the objects
+  final double _margin = 100; 
 
   List<SpriteComponent> initializeObjects(
   List<String> objectNames,
@@ -26,19 +26,23 @@ class ObjectInitializer {
 
   for (final name in objectNames) {
     Vector2 position;
-
-    if (targetedObjectsPlaced < numToDisappear) { 
-      // Place objects in specified area when removing objects based off of location
-      if (targetedObjectsPlaced >= disapearLocations) {
-        position = _findPositionInRegion(screenSize, disappearType.elementAt(disapearLocations - 1));
+    
+    if (!disappearType.isEmpty) {
+      // Place objects randomly on the screen
+      if (targetedObjectsPlaced < numToDisappear) { 
+        // Place objects in specified area when removing objects based off of location
+        if (targetedObjectsPlaced >= disapearLocations) {
+          position = _findPositionInRegion(screenSize, disappearType.elementAt(disapearLocations - 1));
+        } else {
+          position = _findPositionInRegion(screenSize, disappearType.elementAt(targetedObjectsPlaced));
+        }
+        targetedObjectsPlaced++;
       } else {
-        position = _findPositionInRegion(screenSize, disappearType.elementAt(targetedObjectsPlaced));
+        // Place objects randomly outside the specified region
+        position = _findNonOverlappingPosition(screenSize, disappearType);
       }
-      targetedObjectsPlaced++;
-
     } else {
-      // Place objects randomly outside the specified region
-      position = _findNonOverlappingPosition(screenSize, disappearType);
+      position = _findNonOverlappingPosition(screenSize, []);
     }
 
     final image = loadedImages[name];
@@ -79,11 +83,11 @@ class ObjectInitializer {
     switch (region) {
       case 'top_left':
         x = _margin + random.nextDouble() * (halfWidth - _objectSize.x - 2 * _margin);
-        y = _margin + random.nextDouble() * (halfHeight - _objectSize.y - 2 * _margin);
+        y = (_margin + random.nextDouble() * (halfHeight - _objectSize.y - 2 * _margin)) + 60;
         break;
       case 'top_right':
         x = halfWidth + random.nextDouble() * (halfWidth - _objectSize.x - 2 * _margin);
-        y = _margin + random.nextDouble() * (halfHeight - _objectSize.y - 2 * _margin);
+        y = (_margin + random.nextDouble() * (halfHeight - _objectSize.y - 2 * _margin)) + 60;
         break;
       case 'bottom_left':
         x = _margin + random.nextDouble() * (halfWidth - _objectSize.x - 2 * _margin);
@@ -123,7 +127,7 @@ class ObjectInitializer {
 
   for (var i = 0; i < 100; i++) {
     final x = _margin + random.nextDouble() * (screenSize.x - _objectSize.x - 2 * _margin);
-    final y = _margin + random.nextDouble() * (screenSize.y - _objectSize.y - 2 * _margin);
+    final y = (_margin + random.nextDouble() * (screenSize.y - _objectSize.y - 2 * _margin)) + 60;
 
     bool inForbidden = false;
     for (final region in forbiddenRegions) {

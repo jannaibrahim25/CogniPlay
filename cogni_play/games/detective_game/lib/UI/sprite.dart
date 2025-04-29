@@ -21,9 +21,9 @@ class CustomSprite extends SpriteComponent {
     await super.onLoad();
 
     final circle = CircleComponent(
-      radius: size.x * 0.6,
+      radius: size.x * 0.7,
       paint: Paint()
-        ..color = Colors.white.withValues(alpha: 1) // white circle slighly bigger than the sprite. Non transparent right now but might change
+        ..color = Colors.white.withValues(alpha: 0.5) // white circle slighly bigger than the sprite. Non transparent right now but might change
         ..style = PaintingStyle.fill,
       anchor: Anchor.center,
       position: size / 2,

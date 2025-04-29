@@ -7,8 +7,7 @@ import 'dart:async';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import './components/characters/thief/thief.dart';
-import 'speech_bubble.dart';
+
 
 
 
@@ -35,6 +34,9 @@ class DetectiveGame extends FlameGame with TapDetector {
   children.clear();
   this.levelNumber = levelNumber;
   objectManager.loadLevel(levelNumber);
+  overlays.add('LevelIntroOverlay');
+
+  
 
   // Load and add background
   final backgroundImage = await images.load('ocean_level.jpg'); //ocean background for every level right now
@@ -46,22 +48,6 @@ class DetectiveGame extends FlameGame with TapDetector {
   );
   add(background);
 
-  // Load thief
-  final thiefImage = await images.load('character.png');
-  final thiefSprite = Sprite(thiefImage);
-
-  
-  final speechBubble = SpeechBubbleComponent(
-    message: 'You are on level $levelNumber! Study the objects carefully — they will disappear in 10 seconds!',
-    characterSprite: thiefSprite,
-    screenSize: size,
-  );
-  add(speechBubble);
-
-  // Remove it after 3 seconds
-  Future.delayed(const Duration(seconds: 3), () {
-    speechBubble.removeFromParent();
-  });
 
   // load the objects and map the name to created sprites
   Map<String, ui.Image> loadedImages = {};
@@ -89,7 +75,8 @@ class DetectiveGame extends FlameGame with TapDetector {
   // countdown timer (this will be changed 5 seconds is super short)
   //UI for will change to add more information (Connor)
 
-  countdownValue = 5;
+
+  countdownValue = 15;
   countdownText = TextComponent(
     text: '$countdownValue',
     position: Vector2(size.x / 2 - 20, 60),
@@ -104,6 +91,7 @@ class DetectiveGame extends FlameGame with TapDetector {
   add(countdownText);
   countdownTimer = Timer(1.0, repeat: true, onTick: _updateCountdown);
   countdownTimer.start();
+  overlays.add("PauseButton");
 }
 
   //Updating the countdown timer
@@ -173,6 +161,8 @@ class DetectiveGame extends FlameGame with TapDetector {
       actions: [
         TextButton(
           onPressed: () {
+            Navigator.of(buildContext!).pop();
+            Navigator.of(buildContext!).pop();
             Navigator.of(buildContext!).pop();
           },
           child: const Text('OK'),

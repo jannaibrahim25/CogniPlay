@@ -11,11 +11,20 @@
       },
       {
         "id": 2,
-        "objects": ["tree", "brown_chair", "book", "pencil", "jeep", "red_bottle", "banana", "red_car", "yellow_ball"],
-        "num_to_disappear": 3,
+        "objects": ["red_bottle", "apple", "yellow_ball", "brown_chair", "football", "pencil", "orange", "blue_hat", "book"],
+        "num_to_disappear": 4,
         "disappear_type": {
-          "type": "location_based",
-          "location": ["top_right", "bottom_left"]
+          "type": "random",
+          "hide_objects": ["red_bottle", "apple", "football", "orange"]
+        }
+      },
+      {
+        "id": 3,
+        "objects": ["tree", "football", "blue_hat", "apple", "red_car", "banana", "yellow_ball", "book", "pencil"],
+        "num_to_disappear": 2,
+        "disappear_type": {
+          "type": "pattern",
+          "hide_objects": ["apple", "red_car"]
         }
       }
     ]

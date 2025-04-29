@@ -42,7 +42,7 @@ flutter:
     - assets/icons/search.png
     - assets/icons/back.png
     - assets/level_data.json
-    - assets/character.png
+    - assets/images/character.png
     - assets/images/ocean_level.jpg
 
 dependency_overrides:

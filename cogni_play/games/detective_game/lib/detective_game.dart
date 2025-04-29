@@ -6,6 +6,10 @@ import 'dart:ui' as ui;
 import 'dart:async';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import './components/characters/thief/thief.dart';
+import 'speech_bubble.dart';
+
 
 
 class DetectiveGame extends FlameGame with TapDetector {
@@ -13,6 +17,7 @@ class DetectiveGame extends FlameGame with TapDetector {
   late Map<String, SpriteComponent> levelObjects;
   late Timer countdownTimer;
   late TextComponent countdownText;
+  late TextComponent gameText;
   late SpriteComponent background;
 
   //Variables for game and level managment
@@ -41,6 +46,23 @@ class DetectiveGame extends FlameGame with TapDetector {
   );
   add(background);
 
+  // Load thief
+  final thiefImage = await images.load('character.png');
+  final thiefSprite = Sprite(thiefImage);
+
+  
+  final speechBubble = SpeechBubbleComponent(
+    message: 'You are on level $levelNumber! Study the objects carefully — they will disappear in 10 seconds!',
+    characterSprite: thiefSprite,
+    screenSize: size,
+  );
+  add(speechBubble);
+
+  // Remove it after 3 seconds
+  Future.delayed(const Duration(seconds: 3), () {
+    speechBubble.removeFromParent();
+  });
+
   // load the objects and map the name to created sprites
   Map<String, ui.Image> loadedImages = {};
   for (var objectName in objectManager.currentObjects) {
@@ -66,10 +88,11 @@ class DetectiveGame extends FlameGame with TapDetector {
 
   // countdown timer (this will be changed 5 seconds is super short)
   //UI for will change to add more information (Connor)
+
   countdownValue = 5;
   countdownText = TextComponent(
     text: '$countdownValue',
-    position: Vector2(size.x / 2 - 20, 50),
+    position: Vector2(size.x / 2 - 20, 60),
     textRenderer: TextPaint(
       style: const TextStyle(
         fontSize: 48.0,
@@ -85,6 +108,23 @@ class DetectiveGame extends FlameGame with TapDetector {
 
   //Updating the countdown timer
   void _updateCountdown() {
+    final textPaint = TextPaint(
+    style: GoogleFonts.luckiestGuy(
+      fontSize: 48,
+      color: Colors.black,
+      ),
+  );
+    // Create the TextComponent
+    final gameText = TextComponent(
+      text: 'Find the missing objects!',
+      textRenderer: textPaint,
+    );
+    // Optionally set anchor to center
+    gameText.anchor = Anchor.topCenter;
+    // Position in the horizontal center
+    gameText.position = Vector2(size.x / 2, 40);
+    // Add it to your game
+
     countdownValue--;
     print("Countdown value: $countdownValue");
     countdownText.text = '$countdownValue';
@@ -92,6 +132,7 @@ class DetectiveGame extends FlameGame with TapDetector {
       countdownTimer.stop();
       _disappearObjects();
       countdownText.removeFromParent(); 
+      add(gameText);
     }
   }
 

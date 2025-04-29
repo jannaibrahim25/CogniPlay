@@ -150,3 +150,12 @@ Just for now: (I will change this - Connor)
           "hide_objects": ["blue_car", "red_car", "jeep", "truck"]
         }
       }
+
+
+My goals: (Connor)
+- Add overlay to the game with a pause button, restart level
+- exit game button or maybe in the overlay
+- add text for the Instructions
+- add text for the game countdown this could be where the thief is!
+- update UI for the objects
+- make sure the other levels work like random, pattern, and location dissapearance

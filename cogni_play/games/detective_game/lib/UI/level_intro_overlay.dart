@@ -42,7 +42,7 @@ class _LevelIntroOverlayState extends State<LevelIntroOverlay> with SingleTicker
 
     _controller.forward();
 
-    Future.delayed(const Duration(seconds: 5), () async {
+    Future.delayed(const Duration(seconds: 8), () async {
       await _controller.reverse();
       widget.onDismiss();
     });
@@ -69,27 +69,27 @@ class _LevelIntroOverlayState extends State<LevelIntroOverlay> with SingleTicker
               ),
             ),
             Align(
-              alignment: Alignment.center,
+              alignment: Alignment.topCenter,
               child: Padding(
-                padding: const EdgeInsets.only(right: 0),
+                padding: const EdgeInsets.only(right: 0, top: 150),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset('assets/images/character.png', width: 300),
                     const SizedBox(width: 10),
                     Container(
-                      padding: const EdgeInsets.all(12),
+                      padding: const EdgeInsets.all(20),
                       margin: const EdgeInsets.only(bottom: 200),
                       decoration: BoxDecoration(
                         color: Colors.white.withAlpha(240),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
-                        'You are on level ${widget.levelNumber}! \nStudy the objects carefully \nThey will disappear in 10 seconds!',
+                        'Congrats! You are on level ${widget.levelNumber}! \nStudy the objects carefully \nThey will disappear in 15 seconds!',
                         style: GoogleFonts.luckiestGuy(
                           fontSize: 32,
-                          height: 1.2,
-                          color: Colors.black,
+                          height: 1.5,
+                          color: Color(0xFFF9633E),
                           fontWeight: FontWeight.w100,
                         ),
                       ),

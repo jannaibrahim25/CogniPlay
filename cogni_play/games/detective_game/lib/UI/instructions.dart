@@ -5,6 +5,8 @@ import 'detective_game_screen.dart';
 class InstructionsPage extends StatefulWidget {
   const InstructionsPage({super.key});
 
+  
+
   @override
   State<InstructionsPage> createState() => _InstructionsPageState();
 }
@@ -13,6 +15,18 @@ class InstructionsPage extends StatefulWidget {
   double _demoScale = 1.0;
   double _startGameScale = 1.0;
 
+  Widget instructionItem(int number, String text) {
+  return Padding(
+    padding: const EdgeInsets.only(bottom: 12.0),
+    child: Text(
+      '$number. $text',
+      style: GoogleFonts.quicksand(
+        fontSize: 32,
+        color: Colors.black87,
+      ),
+    ),
+  );
+}
 
   @override
   Widget build(BuildContext context) {
@@ -76,9 +90,7 @@ class InstructionsPage extends StatefulWidget {
                       ),
                     ],
                   ),
-
                   const SizedBox(height: 10),
-
                   // Instructions Box
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 150),
@@ -105,19 +117,21 @@ class InstructionsPage extends StatefulWidget {
                           ),
                         ),
                         const SizedBox(height: 16),
-                        Text(
-                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vulputate ullamcorper rutrum. Aliquam eu magna tortor. Praesent tempus ex sed risus auctor placerat. Maecenas congue viverra pharetra. Integer varius libero et imperdiet sodales. Quisque sed mi justo.',
-                          style: GoogleFonts.quicksand(
-                            fontSize: 32,
-                            color: Colors.black87,
-                          ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            instructionItem(1, 'You will be shown a scene with multiple objects!'),
+                            instructionItem(2, 'Study the objects carefully before they disappear!'),
+                            instructionItem(3, 'After 15 seconds, the objects will disappear.'),
+                            instructionItem(4, 'Your job is to find and tap where each object was.'),
+                            instructionItem(5, 'You get 3 chances to find all the objects!'),
+                          ],
                         ),
                       ],
                     ),
                   ),
 
-                  const SizedBox(height: 32),
-
+                  const SizedBox(height: 20),
                   // Buttons
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -134,7 +148,7 @@ class InstructionsPage extends StatefulWidget {
                           duration: const Duration(milliseconds: 50),
                           child: SizedBox(
                             width: 300,
-                            height: 150,
+                            height: 120,
                             child: ElevatedButton(
                               onPressed: () {
                                 // TODO: Handle Demo button action
@@ -155,7 +169,7 @@ class InstructionsPage extends StatefulWidget {
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.luckiestGuy(
                                   color: Colors.white,
-                                  fontSize: 52,
+                                  fontSize: 42,
                                 ),
                               ),
                             ),
@@ -171,7 +185,7 @@ class InstructionsPage extends StatefulWidget {
                           duration: const Duration(milliseconds: 50),
                           child: SizedBox(
                             width: 300,
-                            height: 150,
+                            height: 120,
                             child: ElevatedButton(
                               onPressed: () {
                                 // TODO: Handle Start Game action
@@ -194,7 +208,7 @@ class InstructionsPage extends StatefulWidget {
                               child: Text(
                                 'START\nGAME',
                                 style: GoogleFonts.luckiestGuy(
-                                  fontSize: 52,
+                                  fontSize: 42,
                                   color: Colors.white,
                                   height: 1.2,
                                 ),

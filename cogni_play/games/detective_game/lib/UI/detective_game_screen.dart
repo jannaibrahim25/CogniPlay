@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../detective_game.dart';
 import 'level_intro_overlay.dart';
 import 'pause_overlay.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class DetectiveGameScreen extends StatelessWidget {
   const DetectiveGameScreen({super.key});
@@ -22,16 +23,31 @@ class DetectiveGameScreen extends StatelessWidget {
             },
           ),
 
-          'PauseButton': (context, game) => Positioned(
-            top: 30,
-            right: 20,
-            child: IconButton(
-              icon: const Icon(Icons.pause, size: 40, color: Colors.white),
-              onPressed: () {
-                game.pauseEngine();
-                game.overlays.remove('PauseButton');
-                game.overlays.add('PauseOverlay');
-              },
+          'PauseButton': (context, game) => Padding(
+            padding: const EdgeInsets.only(top: 40, left: 30),
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color(0xFFF9633E), // Set desired background color
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha:0.3),
+                      blurRadius: 4,
+                      offset: const Offset(2, 2),
+                    ),
+                  ],
+                ),
+                child: IconButton(
+                  icon: const Icon(Icons.pause, size: 70, color: Colors.white),
+                  onPressed: () {
+                    game.pauseEngine();
+                    game.overlays.remove('PauseButton');
+                    game.overlays.add('PauseOverlay');
+                  },
+                ),
+              ),
             ),
           ),
           'PauseOverlay': (context, game) => PauseOverlay(
@@ -55,17 +71,37 @@ class DetectiveGameScreen extends StatelessWidget {
           ),
 
           'CheckButton': (BuildContext context, DetectiveGame game) {
-            return Positioned(
-              bottom: 50,
-              left: MediaQuery.of(context).size.width / 2 - 75, //side of button
-              child: ElevatedButton(
-                onPressed: () {
-                  game.checkAnswers(); //check answers function declared in Detective_game.dart
-                },
-                child: const Text('Check Answers'),
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 50),
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: ElevatedButton(
+                  onPressed: () {
+                    game.checkAnswers();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(250, 70),
+                    backgroundColor: const Color(0xFF8C52FF),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(35), // Rounded pill shape
+                    ),
+                    elevation: 8,
+                    shadowColor: Colors.black.withValues(alpha:0.4),
+                  ),
+                  child: Text(
+                    'Check Answers',
+                    style: GoogleFonts.quicksand(
+                      fontSize: 32,
+                      height: 1.5,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ),
             );
           },
+
         },
         initialActiveOverlays: const ['PauseButton'], // Start with button visible
       ),

@@ -76,13 +76,14 @@ class DetectiveGame extends FlameGame with TapDetector {
   //UI for will change to add more information (Connor)
 
 
-  countdownValue = 15;
+  countdownValue = 23;
   countdownText = TextComponent(
     text: '$countdownValue',
     position: Vector2(size.x / 2 - 20, 60),
     textRenderer: TextPaint(
-      style: const TextStyle(
-        fontSize: 48.0,
+      style: GoogleFonts.luckiestGuy(
+        fontSize: 72,
+        letterSpacing: 8,
         color: Colors.white,
         fontWeight: FontWeight.bold,
       ),
@@ -98,8 +99,15 @@ class DetectiveGame extends FlameGame with TapDetector {
   void _updateCountdown() {
     final textPaint = TextPaint(
     style: GoogleFonts.luckiestGuy(
-      fontSize: 48,
-      color: Colors.black,
+      fontSize: 56,
+      shadows: [
+        Shadow(
+          blurRadius: 5,
+          color: Colors.black,
+          offset: const Offset(2, 2),
+        ),
+      ],
+      color: Colors.white,
       ),
   );
     // Create the TextComponent
@@ -110,7 +118,7 @@ class DetectiveGame extends FlameGame with TapDetector {
     // Optionally set anchor to center
     gameText.anchor = Anchor.topCenter;
     // Position in the horizontal center
-    gameText.position = Vector2(size.x / 2, 40);
+    gameText.position = Vector2(size.x / 2, 60);
     // Add it to your game
 
     countdownValue--;
@@ -156,21 +164,51 @@ class DetectiveGame extends FlameGame with TapDetector {
     context: buildContext!,
     barrierDismissible: false,
     builder: (_) => AlertDialog(
-      title: const Text('Congratulations!'),
-      content: const Text('You have completed all levels! 🎉'),
-      actions: [
-        TextButton(
-          onPressed: () {
-            Navigator.of(buildContext!).pop();
-            Navigator.of(buildContext!).pop();
-            Navigator.of(buildContext!).pop();
-          },
-          child: const Text('OK'),
+      title: Text(
+          'Congratulations!',
+          style: GoogleFonts.quicksand(
+            fontSize: 32,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-      ],
-    ),
-  );
-}
+        content: Text(
+          'You have completed all levels!',
+          style: GoogleFonts.quicksand(
+            fontSize: 20,
+            color: Colors.black,
+            fontWeight: FontWeight.w500,
+          ),
+          ),
+        actions: [
+          TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: const Color(0xFFFDB825),
+              padding: EdgeInsets.only(top:10),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(35), 
+              ),
+            ),
+            onPressed: () {
+              Navigator.of(buildContext!).pop();
+              Navigator.of(buildContext!).pop();
+              Navigator.of(buildContext!).pop();
+            },
+            child: Center(
+              child: Text(
+                'Back to Home',
+                style: GoogleFonts.luckiestGuy(
+                  fontSize: 32,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   // we can call this method to start every new level. 
   // Right now there is no way to start from a saved level so we might need to work on that
@@ -189,19 +227,49 @@ class DetectiveGame extends FlameGame with TapDetector {
     context: buildContext!,
     barrierDismissible: false,
     builder: (_) => AlertDialog(
-      title: const Text('Level Complete!'),
-      content: const Text('You found all the missing objects! Ready for next level?'),
-      actions: [
-        TextButton(
-          onPressed: () {
-            Navigator.of(buildContext!).pop();
-            _loadNextLevel();
-          },
-          child: const Text('Next Level'),
+      title: Text(
+          'Level Complete!',
+          style: GoogleFonts.quicksand(
+            fontSize: 32,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-      ],
-    ),
-  );
+        content: Text(
+          'You found all the missing objects! Ready for next level?',
+          style: GoogleFonts.quicksand(
+            fontSize: 20,
+            color: Colors.black,
+            fontWeight: FontWeight.w500,
+          ),
+          ),
+        actions: [
+          TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: const Color(0xFFFDB825),
+              padding: EdgeInsets.only(top:10), // Remove internal padding
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(35), // Rounded pill shape
+              ),
+            ),
+            onPressed: () {
+              Navigator.of(buildContext!).pop();
+              _loadNextLevel();
+            },
+            child: Center(
+              child: Text(
+                'Next Level',
+                style: GoogleFonts.luckiestGuy(
+                  fontSize: 32,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
 
@@ -297,14 +365,43 @@ class DetectiveGame extends FlameGame with TapDetector {
     showDialog(
       context: buildContext!,
       builder: (_) => AlertDialog(
-        title: const Text('Result'),
-        content: Text(message),
+        title: Text(
+          'Result',
+          style: GoogleFonts.quicksand(
+            fontSize: 32,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        content: Text(
+          message,
+          style: GoogleFonts.quicksand(
+            fontSize: 20,
+            color: Colors.black,
+            fontWeight: FontWeight.w500,
+          ),
+          ),
         actions: [
           TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: const Color(0xFFFDB825),
+              padding: EdgeInsets.only(top:10), // Remove internal padding
+              shape: const CircleBorder(),
+              fixedSize: const Size(70, 70), // Force it to be a circle
+            ),
             onPressed: () {
               Navigator.of(buildContext!).pop();
             },
-            child: const Text('OK'),
+            child: Center(
+              child: Text(
+                'OK',
+                style: GoogleFonts.luckiestGuy(
+                  fontSize: 32,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ),
         ],
       ),

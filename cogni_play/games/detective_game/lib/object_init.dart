@@ -127,7 +127,7 @@ class ObjectInitializer {
 
   for (var i = 0; i < 100; i++) {
     final x = _margin + random.nextDouble() * (screenSize.x - _objectSize.x - 2 * _margin);
-    final y = (_margin + random.nextDouble() * (screenSize.y - _objectSize.y - 2 * _margin)) + 60;
+    final y = (_margin + random.nextDouble() * (screenSize.y - _objectSize.y - 2 * _margin));
 
     bool inForbidden = false;
     for (final region in forbiddenRegions) {

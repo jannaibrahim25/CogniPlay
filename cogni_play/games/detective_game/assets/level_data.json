@@ -2,8 +2,7 @@
   "levels":[
       {
         "id": 1,
-        "objects": ["banana", "book", "football", "blue_hat", "apple", "orange", "yellow_ball", "tree"],
-        "num_to_disappear": 2,
+        "objects": ["flag", "book", "hook", "treasure_map", "bottle", "necklace", "anchor", "diamond"],        "num_to_disappear": 2,
         "disappear_type": {
           "type": "location_based",
           "location": ["top_right"]
@@ -11,20 +10,20 @@
       },
       {
         "id": 2,
-        "objects": ["tree", "football", "blue_hat", "apple", "red_car", "banana", "yellow_ball", "book", "pencil"],
+        "objects": ["diamond", "hook", "treasure_map", "bottle", "coin", "flag", "anchor", "book", "chalice"],
         "num_to_disappear": 2,
         "disappear_type": {
           "type": "pattern",
-          "hide_objects": ["apple", "red_car"]
+          "hide_objects": ["coin", "chalice"]
         }
       },
       {
         "id": 3,
-        "objects": ["red_bottle", "apple", "yellow_ball", "brown_chair", "football", "pencil", "orange", "blue_hat", "book"],
+        "objects": ["crown", "bottle", "anchor", "rope", "hook", "chalice", "necklace", "treasure_map", "book"],
         "num_to_disappear": 3,
         "disappear_type": {
           "type": "random",
-          "hide_objects": ["red_bottle", "apple", "orange"]
+          "hide_objects": ["bottle", "necklace", "treasure_map"]
         }
       }   
     ]

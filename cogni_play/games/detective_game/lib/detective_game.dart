@@ -24,7 +24,7 @@ class DetectiveGame extends FlameGame with TapDetector {
   int levelNumber = 1; 
   bool allowGuessing = false;
   List<Vector2> selectedPositions = [];
-  final double guessRadius = 50; //size of guess square
+  final double guessRadius = 90; //size of guess square
 
   //Starts the level and clears all previous level objects
   Future<void> startLevel(int levelNumber) async {
@@ -327,6 +327,7 @@ class DetectiveGame extends FlameGame with TapDetector {
   // Public method called by check answers overlay button
   // This method checks the selected guesses against the disappeared objects
   void checkAnswers() {
+    List<Vector2> incorrectGuesses = [];
     if (selectedPositions.length != objectManager.disappearedObjects.length) {
       _showResultDialog('Please select ${objectManager.disappearedObjects.length} guesses!');
       return;
@@ -349,12 +350,19 @@ class DetectiveGame extends FlameGame with TapDetector {
       }
       if (foundMatch) {
         correctGuesses++;
+      } else {
+        incorrectGuesses.add(guess);
       }
     }
     if (correctGuesses == missingObjects.length) {
-      _showLevelCompleteDialog(); // <-- NEW!!
+      _showLevelCompleteDialog(); 
     } else {
       _showResultDialog('Incorrect. You found $correctGuesses out of ${missingObjects.length} correctly.');
+      int l = incorrectGuesses.length;
+      for (int i = 0; i < l; i++) {
+        print(i);
+        selectedPositions.remove(incorrectGuesses[i]); // Remove incorrect guess
+      }
     }
   }
 

@@ -5,8 +5,6 @@ import 'detective_game_screen.dart';
 class InstructionsPage extends StatefulWidget {
   const InstructionsPage({super.key});
 
-  
-
   @override
   State<InstructionsPage> createState() => _InstructionsPageState();
 }
@@ -119,6 +117,7 @@ class InstructionsPage extends StatefulWidget {
                         const SizedBox(height: 16),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          //making a list of instructions so it is easier to read
                           children: [
                             instructionItem(1, 'You will be shown a scene with multiple objects!'),
                             instructionItem(2, 'Study the objects carefully before they disappear!'),
@@ -130,7 +129,6 @@ class InstructionsPage extends StatefulWidget {
                       ],
                     ),
                   ),
-
                   const SizedBox(height: 20),
                   // Buttons
                   Row(

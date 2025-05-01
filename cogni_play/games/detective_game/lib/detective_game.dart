@@ -76,7 +76,7 @@ class DetectiveGame extends FlameGame with TapDetector {
   //UI for will change to add more information (Connor)
 
 
-  countdownValue = 23;
+  countdownValue = 23; // The countdown time is 15 seconds after the level intro overlay dissapears
   countdownText = TextComponent(
     text: '$countdownValue',
     position: Vector2(size.x / 2 - 20, 60),
@@ -120,7 +120,6 @@ class DetectiveGame extends FlameGame with TapDetector {
     // Position in the horizontal center
     gameText.position = Vector2(size.x / 2, 60);
     // Add it to your game
-
     countdownValue--;
     print("Countdown value: $countdownValue");
     countdownText.text = '$countdownValue';
@@ -159,6 +158,7 @@ class DetectiveGame extends FlameGame with TapDetector {
 
 
   // UI for completed game screen
+  // Updated styling to match the theme of the game
   void _showGameCompleteDialog() {
   showDialog(
     context: buildContext!,
@@ -222,6 +222,7 @@ class DetectiveGame extends FlameGame with TapDetector {
 }
 
   //UI to show the level complete after you get all the guess correctly
+  // Finished UI for the level compelete screen
   void _showLevelCompleteDialog() {
   showDialog(
     context: buildContext!,
@@ -306,8 +307,6 @@ class DetectiveGame extends FlameGame with TapDetector {
   }
 }
 
-
-
   //draw the guess on the screen
   @override
   void render(Canvas canvas) {
@@ -361,6 +360,7 @@ class DetectiveGame extends FlameGame with TapDetector {
 
   // Show the results from the guesses 
   // shows how many you got correct
+  // finished UI for the result screen
   void _showResultDialog(String message) {
     showDialog(
       context: buildContext!,

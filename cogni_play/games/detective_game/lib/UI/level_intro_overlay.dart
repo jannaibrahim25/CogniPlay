@@ -31,7 +31,7 @@ class _LevelIntroOverlayState extends State<LevelIntroOverlay> with SingleTicker
     );
 
     _slideAnimation = Tween<Offset>(
-      begin: const Offset(0.0, 0.0), // from the right
+      begin: const Offset(0.0, 0.0), 
       end: Offset.zero,
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
 
@@ -54,6 +54,7 @@ class _LevelIntroOverlayState extends State<LevelIntroOverlay> with SingleTicker
     super.dispose();
   }
 
+  //this is the overlay that shows the character and the curent level the user is on
   @override
   Widget build(BuildContext context) {
     return FadeTransition(

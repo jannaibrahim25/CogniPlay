@@ -13,9 +13,8 @@ class PauseOverlay extends StatelessWidget {
     required this.onRestart,
     required this.onQuit,
   });
-
   
-
+  //pause button on the screen. It is located in the top left of the game screen
   @override
   Widget build(BuildContext context) {
     final ButtonStyle pauseButtonStyle = ElevatedButton.styleFrom(

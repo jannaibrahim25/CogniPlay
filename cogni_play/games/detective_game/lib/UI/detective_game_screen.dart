@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 class DetectiveGameScreen extends StatelessWidget {
   const DetectiveGameScreen({super.key});
 
+  // this is the main screen for the game and handles all the overlays and some game logic
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +23,6 @@ class DetectiveGameScreen extends StatelessWidget {
               game.overlays.remove('LevelIntroOverlay');
             },
           ),
-
           'PauseButton': (context, game) => Padding(
             padding: const EdgeInsets.only(top: 40, left: 30),
             child: Align(
@@ -65,7 +65,7 @@ class DetectiveGameScreen extends StatelessWidget {
             onQuit: () {
               game.resumeEngine();
               game.overlays.remove('PauseOverlay');
-              Navigator.of(context).pop(); // Or navigate to your home screen
+              Navigator.of(context).pop(); 
               Navigator.of(context).pop();
             },
           ),
@@ -83,7 +83,7 @@ class DetectiveGameScreen extends StatelessWidget {
                     minimumSize: const Size(250, 70),
                     backgroundColor: const Color(0xFF8C52FF),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(35), // Rounded pill shape
+                      borderRadius: BorderRadius.circular(35),
                     ),
                     elevation: 8,
                     shadowColor: Colors.black.withValues(alpha:0.4),
@@ -103,7 +103,7 @@ class DetectiveGameScreen extends StatelessWidget {
           },
 
         },
-        initialActiveOverlays: const ['PauseButton'], // Start with button visible
+        initialActiveOverlays: const ['PauseButton'], 
       ),
     );
   }

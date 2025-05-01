@@ -23,7 +23,8 @@ Things we need to work on:
 
 
 
-Just for now: (I will change this - Connor)
+In the level_data.json file there are three levels currently. One for each type of dissapearance they all work and we can add more levels as we 
+see fit but for right now I didn't want to have 15 levels just because it took awhile to get to the end screen
       {
         "id": 2,
         "objects": ["tree", "brown_chair", "book", "pencil", "blue_car", "red_bottle", "banana", "map", "yellow_ball"],
@@ -150,12 +151,3 @@ Just for now: (I will change this - Connor)
           "hide_objects": ["blue_car", "red_car", "jeep", "truck"]
         }
       }
-
-
-My goals: (Connor)
-- Add overlay to the game with a pause button, restart level
-- exit game button or maybe in the overlay
-- add text for the Instructions
-- add text for the game countdown this could be where the thief is!
-- update UI for the objects
-- make sure the other levels work like random, pattern, and location dissapearance

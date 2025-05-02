@@ -2,7 +2,16 @@
   "levels":[
       {
         "id": 1,
-        "objects": ["flag", "book", "hook", "treasure_map", "bottle", "necklace", "anchor", "diamond"],        
+        "objects": ["coin", "book", "necklace", "bottle"],
+        "num_to_disappear": 1,
+        "disappear_type": {
+          "type": "location_based",
+          "location": ["bottom_left"]
+        }
+      },
+      {
+        "id": 2,
+        "objects": ["flag", "hook", "necklace", "anchor", "diamond"],
         "num_to_disappear": 2,
         "disappear_type": {
           "type": "location_based",
@@ -10,22 +19,67 @@
         }
       },
       {
-        "id": 2,
-        "objects": ["diamond", "hook", "treasure_map", "bottle", "coin", "flag", "anchor", "book", "chalice"],
-        "num_to_disappear": 2,
+        "id": 3,
+        "objects": ["book", "treasure_map", "bottle", "chalice", "coin", "rope"],
+        "num_to_disappear": 3,
         "disappear_type": {
-          "type": "pattern",
-          "hide_objects": ["coin", "chalice"]
+          "type": "location_based",
+          "location": ["bottom_right"]
         }
       },
       {
-        "id": 3,
-        "objects": ["flag", "bottle", "anchor", "rope", "hook", "chalice", "necklace", "treasure_map", "book"],
+        "id": 4,
+        "objects": ["coin", "bottle", "rope", "hook", "chalice", "necklace", "diamond"],
+        "num_to_disappear": 2,
+        "disappear_type": {
+          "type": "random",
+          "hide_objects": ["hook", "necklace"]
+        }
+      },
+      {
+        "id": 5,
+        "objects": ["flag", "anchor", "bottle", "hook", "chalice", "necklace", "treasure_map", "book"],
         "num_to_disappear": 3,
         "disappear_type": {
           "type": "random",
           "hide_objects": ["bottle", "necklace", "treasure_map"]
         }
-      }   
+      },
+      {
+        "id": 6,
+        "objects": ["flag", "book", "treasure_map", "bottle", "necklace", "anchor", "diamond", "chalice", "rope"],
+        "num_to_disappear": 4,
+        "disappear_type": {
+          "type": "random",
+          "hide_objects": ["flag", "diamond", "rope"]
+        }
+      },
+      {
+        "id": 7,
+        "objects": ["necklace", "treasure_map", "flag", "anchor", "book", "diamond", "hook", "chalice", "bottle"],
+        "num_to_disappear": 2,
+        "disappear_type": {
+          "type": "pattern",
+          "hide_objects": ["treasure_map", "anchor"]
+        }
+      },
+      {
+        "id": 8,
+        "objects": ["diamond", "hook", "treasure_map", "bottle", "coin", "flag", "anchor", "book", "chalice", "rope"],
+        "num_to_disappear": 3,
+        "disappear_type": {
+          "type": "pattern",
+          "hide_objects": ["coin", "chalice", "hook"]
+        }
+      },
+      {
+        "id": 9,
+        "objects": ["flag", "book", "hook", "treasure_map", "bottle", "necklace", "anchor", "diamond", "chalice", "coin", "rope"],
+        "num_to_disappear": 4,
+        "disappear_type": {
+          "type": "pattern",
+          "hide_objects": ["treasure_map", "rope", "hook", "chalice"]
+        }
+      }
     ]
   }

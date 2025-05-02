@@ -2,7 +2,8 @@
   "levels":[
       {
         "id": 1,
-        "objects": ["flag", "book", "hook", "treasure_map", "bottle", "necklace", "anchor", "diamond"],        "num_to_disappear": 2,
+        "objects": ["flag", "book", "hook", "treasure_map", "bottle", "necklace", "anchor", "diamond"],        
+        "num_to_disappear": 2,
         "disappear_type": {
           "type": "location_based",
           "location": ["top_right"]

@@ -33,6 +33,7 @@ flutter:
     - assets/images/Objects/hook.png
     - assets/images/Objects/necklace.png
     - assets/images/Objects/rope.png
+    - assets/images/Objects/flag.png
     - assets/images/Objects/treasure_map.png
     - assets/icons/settings.png
     - assets/icons/logo.png

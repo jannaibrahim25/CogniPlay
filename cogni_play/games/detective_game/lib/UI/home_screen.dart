@@ -42,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
             left: 20,
             child: IconButton(
               icon: Image.asset('assets/icons/settings.png',
+              color: Colors.black,
               width: 50, 
               height: 50,
               ),

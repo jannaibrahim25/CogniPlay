@@ -277,17 +277,6 @@ class DetectiveGame extends FlameGame with TapDetector {
     );
   }
 
-  void _triggerGameOver() {
-    pauseEngine();
-
-    // Go back one level if not already on level 1
-    if (levelNumber > 1) {
-      levelNumber--;
-    }
-
-    startLevel(levelNumber); // restart from previous level
-    // TODO: needs UI dialog
-  }
 
 
 //update the countdown timer
@@ -383,7 +372,10 @@ void render(Canvas canvas) {
     } else {
       incorrectGuessCount++;
       if (incorrectGuessCount >= maxGuesses) {
-        _triggerGameOver();
+        if (levelNumber > 1) {
+          levelNumber--;
+        }
+        _showGameOverDialog('Game Over! You have used all your guesses.');
       } else {
         _showResultDialog(
             'Incorrect. You found $correctGuesses out of ${missingObjects.length}.\n'
@@ -394,6 +386,83 @@ void render(Canvas canvas) {
         }
       }
     }
+  }
+
+  void _showGameOverDialog(String message) {
+    showDialog(
+      context: buildContext!,
+      builder: (_) => AlertDialog(
+        title: Text(
+          'Result',
+          style: GoogleFonts.quicksand(
+            fontSize: 32,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        content: Text(
+          message,
+          style: GoogleFonts.quicksand(
+            fontSize: 20,
+            color: Colors.black,
+            fontWeight: FontWeight.w500,
+          ),
+          ),
+        actions: [
+          TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: const Color(0xFFFDB825),
+              padding: EdgeInsets.only(top:10), // Remove internal padding
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(35), // Rounded pill shape
+              ),
+            ),
+            onPressed: () {
+              Navigator.of(buildContext!).pop();
+              if (levelNumber > 1) {
+                levelNumber--;
+              }
+              startLevel(levelNumber);
+            },
+            child: Center(
+              child: Text(
+                'Go back one level',
+                style: GoogleFonts.luckiestGuy(
+                  fontSize: 32,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 15),
+          TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.grey,
+              padding: EdgeInsets.only(top:10),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(35), 
+              ),
+            ),
+            onPressed: () {
+              Navigator.of(buildContext!).pop();
+              Navigator.of(buildContext!).pop();
+              Navigator.of(buildContext!).pop();
+            },
+            child: Center(
+              child: Text(
+                'Back to Home',
+                style: GoogleFonts.luckiestGuy(
+                  fontSize: 32,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   // Show the results from the guesses 

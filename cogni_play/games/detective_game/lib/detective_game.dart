@@ -79,25 +79,31 @@ class DetectiveGame extends FlameGame with TapDetector {
   // countdown timer (this will be changed 5 seconds is super short)
   //UI for will change to add more information (Connor)
 
-
-  countdownValue = 22; // The countdown time is 15 seconds after the level intro overlay dissapears
-  countdownText = TextComponent(
-    text: '$countdownValue',
-    position: Vector2(size.x / 2 - 20, 60),
-    textRenderer: TextPaint(
-      style: GoogleFonts.luckiestGuy(
-        fontSize: 72,
-        letterSpacing: 8,
-        color: Colors.white,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-  );
-  add(countdownText);
-  countdownTimer = Timer(1.0, repeat: true, onTick: _updateCountdown);
-  countdownTimer.start();
+  // Janna - restructured the block that was above this line
   overlays.add("PauseButton");
 }
+
+  // countdownValue can now be 15 instead of the arbitrary 22 because we call this function after the overlay is dismissed
+  void startCountdown() {
+    countdownValue = 15;
+
+    countdownText = TextComponent(
+      text: '$countdownValue',
+      position: Vector2(size.x / 2 - 20, 60),
+      textRenderer: TextPaint(
+        style: GoogleFonts.luckiestGuy(
+          fontSize: 72,
+          letterSpacing: 8,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+
+    add(countdownText);
+    countdownTimer = Timer(1.0, repeat: true, onTick: _updateCountdown);
+    countdownTimer.start();
+  }
 
   //Updating the countdown timer
   void _updateCountdown() {
@@ -157,6 +163,7 @@ class DetectiveGame extends FlameGame with TapDetector {
     objectManager = ObjectManager();
     await objectManager.loadLevels('assets/level_data.json'); //in level_manager.dart
     await startLevel(1);
+    countdownTimer = Timer(1.0, onTick: () {}); // just to avoid late initialization error
   }
 
 

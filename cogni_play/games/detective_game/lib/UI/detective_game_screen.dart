@@ -21,6 +21,7 @@ class DetectiveGameScreen extends StatelessWidget {
             levelNumber: game.levelNumber, // Pass the required levelNumber
             onDismiss: () {
               game.overlays.remove('LevelIntroOverlay');
+              game.startCountdown();
             },
           ),
           'PauseButton': (context, game) => Padding(

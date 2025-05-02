@@ -25,6 +25,8 @@ class DetectiveGame extends FlameGame with TapDetector {
   bool allowGuessing = false;
   List<Vector2> selectedPositions = [];
   final double guessRadius = 90; //size of guess square
+  int incorrectGuessCount = 0;
+  final int maxGuesses = 3;
 
   //Starts the level and clears all previous level objects
   Future<void> startLevel(int levelNumber) async {
@@ -33,10 +35,12 @@ class DetectiveGame extends FlameGame with TapDetector {
   selectedPositions.clear();
   children.clear();
   this.levelNumber = levelNumber;
+  incorrectGuessCount = 0;    // reset guess tracker
   objectManager.loadLevel(levelNumber);
   overlays.add('LevelIntroOverlay');
 
-  
+
+
 
   // Load and add background
   final backgroundImage = await images.load('ocean_level.png'); //ocean background for every level right now
@@ -273,6 +277,18 @@ class DetectiveGame extends FlameGame with TapDetector {
     );
   }
 
+  void _triggerGameOver() {
+    pauseEngine();
+
+    // Go back one level if not already on level 1
+    if (levelNumber > 1) {
+      levelNumber--;
+    }
+
+    startLevel(levelNumber); // restart from previous level
+    // TODO: needs UI dialog
+  }
+
 
 //update the countdown timer
 @override
@@ -363,13 +379,19 @@ void render(Canvas canvas) {
       }
     }
     if (correctGuesses == missingObjects.length) {
-      _showLevelCompleteDialog(); 
+      _showLevelCompleteDialog();
     } else {
-      _showResultDialog('Incorrect. You found $correctGuesses out of ${missingObjects.length} correctly.');
-      int l = incorrectGuesses.length;
-      for (int i = 0; i < l; i++) {
-        print(i);
-        selectedPositions.remove(incorrectGuesses[i]); // Remove incorrect guess
+      incorrectGuessCount++;
+      if (incorrectGuessCount >= maxGuesses) {
+        _triggerGameOver();
+      } else {
+        _showResultDialog(
+            'Incorrect. You found $correctGuesses out of ${missingObjects.length}.\n'
+                'Guesses left: ${maxGuesses - incorrectGuessCount}'
+        );
+        for (var guess in incorrectGuesses) {
+          selectedPositions.remove(guess);
+        }
       }
     }
   }

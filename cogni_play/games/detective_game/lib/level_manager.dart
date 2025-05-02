@@ -6,7 +6,6 @@ import 'package:flame/components.dart';
 import 'dart:ui' as ui; // Flame uses this for image rendering
 
 import 'dart:convert';
-import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/services.dart' show rootBundle;

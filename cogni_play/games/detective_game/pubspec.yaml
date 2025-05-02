@@ -35,6 +35,17 @@ flutter:
     - assets/images/Objects/rope.png
     - assets/images/Objects/flag.png
     - assets/images/Objects/treasure_map.png
+    - assets/images/objects/anchor.png
+    - assets/images/objects/book.png
+    - assets/images/objects/bottle.png
+    - assets/images/objects/chalice.png
+    - assets/images/objects/coin.png
+    - assets/images/objects/diamond.png
+    - assets/images/objects/hook.png
+    - assets/images/objects/necklace.png
+    - assets/images/objects/rope.png
+    - assets/images/objects/treasure_map.png
+    - assets/images/objects/flag.png
     - assets/icons/settings.png
     - assets/icons/logo.png
     - assets/icons/profile.png

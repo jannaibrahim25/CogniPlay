@@ -76,7 +76,7 @@ class DetectiveGame extends FlameGame with TapDetector {
   //UI for will change to add more information (Connor)
 
 
-  countdownValue = 23; // The countdown time is 15 seconds after the level intro overlay dissapears
+  countdownValue = 22; // The countdown time is 15 seconds after the level intro overlay dissapears
   countdownText = TextComponent(
     text: '$countdownValue',
     position: Vector2(size.x / 2 - 20, 60),
@@ -309,19 +309,27 @@ class DetectiveGame extends FlameGame with TapDetector {
 
   //draw the guess on the screen
   @override
-  void render(Canvas canvas) {
-    super.render(canvas);
-    final paint = Paint()
-      ..color = Colors.yellow
-      ..strokeWidth = 3
+void render(Canvas canvas) {
+  super.render(canvas);
+  for (var pos in selectedPositions) {
+    final center = pos.toOffset();
+
+    // Outer glow
+    final glowPaint = Paint()
+      ..color = Colors.yellow.withValues(alpha: 0.3)
+      ..style = PaintingStyle.fill;
+    canvas.drawCircle(center, guessRadius * 0.7, glowPaint);
+
+
+    // Bubble outline
+    final outlinePaint = Paint()
+      ..color = Colors.yellowAccent
+      ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
-    for (var pos in selectedPositions) {
-      canvas.drawRect(
-        Rect.fromCenter(center: pos.toOffset(), width: guessRadius, height: guessRadius),
-        paint,
-      );
-    }
+    canvas.drawCircle(center, guessRadius * 0.7, outlinePaint);
   }
+}
+
 
 
   // Public method called by check answers overlay button

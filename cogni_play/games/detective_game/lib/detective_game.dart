@@ -39,7 +39,7 @@ class DetectiveGame extends FlameGame with TapDetector {
   
 
   // Load and add background
-  final backgroundImage = await images.load('ocean_level.jpg'); //ocean background for every level right now
+  final backgroundImage = await images.load('ocean_level.png'); //ocean background for every level right now
   background = SpriteComponent(
     sprite: Sprite(backgroundImage),
     size: size,

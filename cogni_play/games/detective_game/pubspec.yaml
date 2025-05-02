@@ -24,19 +24,16 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/background.png
-    - assets/images/Objects/apple.png
-    - assets/images/Objects/banana.png
-    - assets/images/Objects/blue_hat.png
+    - assets/images/Objects/anchor.png
     - assets/images/Objects/book.png
-    - assets/images/Objects/brown_chair.png
-    - assets/images/Objects/football.png
-    - assets/images/Objects/jeep.png
-    - assets/images/Objects/orange.png
-    - assets/images/Objects/pencil.png
-    - assets/images/Objects/red_bottle.png
-    - assets/images/Objects/red_car.png
-    - assets/images/Objects/tree.png
-    - assets/images/Objects/yellow_ball.png
+    - assets/images/Objects/bottle.png
+    - assets/images/Objects/chalice.png
+    - assets/images/Objects/coin.png
+    - assets/images/Objects/diamond.png
+    - assets/images/Objects/hook.png
+    - assets/images/Objects/necklace.png
+    - assets/images/Objects/rope.png
+    - assets/images/Objects/treasure_map.png
     - assets/icons/settings.png
     - assets/icons/logo.png
     - assets/icons/profile.png
@@ -44,7 +41,7 @@ flutter:
     - assets/icons/back.png
     - assets/level_data.json
     - assets/images/character.png
-    - assets/images/ocean_level.jpg
+    - assets/images/ocean_level.png
 
 dependency_overrides:
  material_color_utilities: ^0.12.0 

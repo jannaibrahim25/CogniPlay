@@ -19,7 +19,7 @@
       },
       {
         "id": 3,
-        "objects": ["crown", "bottle", "anchor", "rope", "hook", "chalice", "necklace", "treasure_map", "book"],
+        "objects": ["flag", "bottle", "anchor", "rope", "hook", "chalice", "necklace", "treasure_map", "book"],
         "num_to_disappear": 3,
         "disappear_type": {
           "type": "random",

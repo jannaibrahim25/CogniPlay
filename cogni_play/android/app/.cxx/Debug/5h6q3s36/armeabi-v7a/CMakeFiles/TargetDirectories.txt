@@ -1,0 +1,2 @@
+C:/Users/janna/Downloads/hopkins/spring-2025/CogniPlay/cogni_play/android/app/.cxx/Debug/5h6q3s36/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/janna/Downloads/hopkins/spring-2025/CogniPlay/cogni_play/android/app/.cxx/Debug/5h6q3s36/armeabi-v7a/CMakeFiles/rebuild_cache.dir

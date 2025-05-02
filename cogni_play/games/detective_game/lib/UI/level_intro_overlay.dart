@@ -65,7 +65,7 @@ class _LevelIntroOverlayState extends State<LevelIntroOverlay> with SingleTicker
           children: [
             Positioned.fill(
               child: Image.asset(
-                'assets/images/ocean_level.jpg',
+                'assets/images/ocean_level.png',
                 fit: BoxFit.fill,
               ),
             ),
